@@ -1,0 +1,176 @@
+::selection {
+    background: #00ff118d;
+    text-shadow: none;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #000;
+    font: 1rem Inconsolata, monospace;
+    text-shadow: 0 0 5px #C8C8C8;
+    color: #fff;
+    caret-color: #fff;
+
+    .screen-borders {
+        width: 100vw;
+        height: 100vh;
+        box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.7), 0 0 30px rgba(0, 0, 0, 0.5);
+        background-color: #333;
+        box-sizing: border-box;
+        padding: 1cm;
+        position: relative;
+
+        @media (max-width: 600px) {
+            padding: 0.4cm;
+        }
+
+        .console-container {
+            width: 100%;
+            height: 100%;
+            box-sizing: border-box;
+            overflow: hidden;
+            position: relative;
+
+            border-radius: 0.6cm;
+            padding: 0.8cm;
+            padding-top: 0;
+            background-image: radial-gradient(rgba(0, 150, 0, 0.10), black 120%);
+
+            display: flex;
+            flex-direction: column;
+            gap: 0.1em;
+            align-items: flex-end; // Выравнивание элементов внизу
+
+            @media (max-width: 600px) {
+                padding: 0.3cm;
+                border-radius: 0.4cm;
+            }
+
+            &::after {
+                color: greenyellow;
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: repeating-linear-gradient(0deg,
+                        rgba(black, 0.15),
+                        rgba(black, 0.15) 1px,
+                        transparent 1px,
+                        transparent 2px);
+                pointer-events: none;
+                box-shadow: inset 0 0 2cm rgba(0, 0, 0,0.8); // Внутренняя тень для реалистичности
+                animation: cmd-enable 6s;
+            }
+
+            .screen-id {
+                color: #00bd00;
+                position: absolute;
+                top: 1cm;
+                left: 1cm;
+                font-size: 4cm;
+                text-shadow: none;
+                pointer-events: none;
+                line-height: 0.75em;
+                opacity: 0;
+                animation: text-animate 6s;
+
+                @media (max-width: 600px) {
+                    top: 0.5cm;
+                    left: 0.5cm;
+                    font-size: 2cm;
+                }
+            }
+
+            .output-area {
+                flex-grow: 1; // Занимаем все доступное пространство
+                overflow: hidden;
+
+                &::-webkit-scrollbar {
+                    display: none;
+                }
+            }
+
+            .output-area {
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-end;
+            }
+
+            .output-area,
+            .input-row {
+                width: 100%;
+
+                .output-line {
+                    margin-bottom: 5px;
+                }
+
+                .input-area {
+                    flex: 1; // Растягиваем текстовое поле на всю доступную ширину внутри .input-row
+                    border: none;
+                    background-color: transparent;
+                    cursor: text;
+                    outline: none;
+                    box-shadow: none;
+                    font: 1rem Inconsolata, monospace;
+                    text-shadow: 0 0 5px #C8C8C8;
+                    color: #fff;
+                    padding: 0;
+                }
+
+                .send-button {
+                    background-color: transparent;
+                    border: none;
+                    text-align: center;
+                    padding: 5px;
+                    cursor: pointer;
+                    font: 1rem Inconsolata, monospace;
+                    text-shadow: 0 0 5px #C8C8C8;
+                    color: #fff;
+                }
+            }
+
+            .input-row {
+                display: flex;
+                gap: 0.5em;
+            }
+        }
+    }
+}
+
+@keyframes cmd-enable {
+    0% {
+        background-color: #000;
+    }
+
+    15% {
+        background-color: #000;
+    }
+
+    100% {
+        background-color: transparent;
+    }
+}
+
+@keyframes text-animate {
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 0;
+    }
+
+    70% {
+        opacity: 1;
+    }
+
+    95% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
